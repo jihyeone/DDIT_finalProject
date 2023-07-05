@@ -1,0 +1,13 @@
+eclipse.preferences.version=1
+fontPropagated=true
+org.eclipse.wst.jsdt.ui.editor.tab.width=
+org.eclipse.wst.jsdt.ui.formatterprofiles.version=11
+org.eclipse.wst.jsdt.ui.javadoclocations.migrated=true
+org.eclipse.wst.jsdt.ui.text.code_templates_migrated=true
+org.eclipse.wst.jsdt.ui.text.custom_code_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates/>
+org.eclipse.wst.jsdt.ui.text.custom_templates=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?><templates><template autoinsert\="true" context\="javaScript" deleted\="false" description\="" enabled\="true" name\="ajaxCode">$$.ajax({&\#13;\r\n\t\t\turl \: "${cursor}"&\#13;\r\n\t\t\t, method \: ""&\#13;\r\n\t\t\t, data \: {}&\#13;\r\n\t\t\t, dataType \: ""&\#13;\r\n\t\t}).done(function(resp, textStatus, jqXHR){\t// \uC131\uACF5&\#13;\r\n\t\t\t&\#13;\r\n\t\t}).fail(function(jqXHR, status, error){\t// \uC2E4\uD328&\#13;\r\n\t\t\tconsole.log(`\uC0C1\uD0DC\uCF54\uB4DC \: \\$${status}, \uC5D0\uB7EC\uBA54\uC2DC\uC9C0 \: \\$${error}`);&\#13;\r\n\t\t});</template></templates>
+org.eclipse.wst.jsdt.ui.text.templates_migrated=true
+proposalOrderMigrated=true
+tabWidthPropagated=true
+useAnnotationsPrefPage=true
+useQuickDiffPrefPage=true

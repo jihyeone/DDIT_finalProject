@@ -1,0 +1,31 @@
+1680483270878	Rename type 'MemberListControllerServlet'
+1680483281188	Rename type 'MemberInsertControllerServlet'
+1680484281778	Rename type 'MemberViewControllerServlet'
+1680484678219	Rename type 'LoginProcessControllerServlet'
+1680484906960	Rename type 'LogoutControllerServlet'
+1680485240234	Move 'login' to 'view'
+1680485888579	Rename type 'MemberUpdateControllerServlet'
+1680486051600	Rename type 'MemberDeleteControllerServlet'
+1680486181307	Rename type 'MypageControllerSevlet'
+1680486454095	Rename resource 'view'
+1680486892973	Rename type 'MypageControllerServlet'
+1680499726200	Delete element
+1680499738509	Delete element
+1680499936451	Rename package 'kr.or.ddit.mvc.annotation.streotype'
+1680504866018	Copy compilation unit
+1680508774830	Change method 'resolveArgument'
+1680510663476	Rename type 'BuyerListControllerServlet'
+1680510984637	Rename type 'BuyerInsertControllerServlet'
+1680511546676	Rename type 'BuyerUpdateControllerServlet'
+1680511718430	Rename type 'BuyerViewControllerServlet'
+1680514477067	Rename type 'RequestparamMethodArgumentResolver'
+1680523518006	Delete element
+1680572045425	Rename local variable 'memImage'
+1680572988448	Rename type 'ProdListControllerServlet'
+1680573544860	Rename type 'ProdInsertControllerServlet'
+1680574354170	Rename type 'ProdViewControllerServlet'
+1680574750677	Rename type 'ProdUpdateControllerServlet'
+1680576342437	Rename type 'ProdListController'
+1680576377518	Delete element
+1680674634699	Copy file
+1680758932337	Copy folder

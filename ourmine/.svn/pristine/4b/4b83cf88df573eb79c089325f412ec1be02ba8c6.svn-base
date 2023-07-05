@@ -1,0 +1,300 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
+
+<style>
+    .grid-container {
+        display: grid;
+        grid-template-columns: 1fr 300px;
+        grid-template-areas: "main  main right"
+                                "main main  right"
+    ;
+        height: 100vh;
+        align-items: center; /* 이 부분을 추가합니다 */
+    }
+
+    .grid-main {
+        grid-area: main;
+    }
+
+    .grid-right {
+        grid-area: right;
+    }
+</style>
+
+ <button type="button" class="btn btn-dark btn-set-task w-sm-100" data-bs-toggle="modal" data-bs-target="#tickadd"><i class="icofont-plus-circle me-2 fs-6"></i>부서 추가</button>
+
+
+
+
+<!--    ========================================================    -->
+
+
+<div class="grid-container">
+    <div id="chart_div" class="grid-main">
+
+
+    </div>
+
+
+    <!--조직도를 클릭시 나올 네비게이션바 -->
+    <div class="gird-right">
+        <div
+                class="card card-chat border-right border-top-0 border-bottom-0  w380 grid-right">
+            <div class="px-4 py-3 py-md-4">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control mb-1" placeholder="Search...">
+                </div>
+
+                <div class="nav nav-pills justify-content-between text-center"
+                     role="tablist">
+                    <a class="flex-fill rounded border-0 nav-link active" data-bs-toggle="tab" href="#chat-recent" role="tab" aria-selected="true">부서인원</a> <a class="flex-fill rounded border-0 nav-link" data-bs-toggle="tab"
+                        href="#chat-groups" role="tab" aria-selected="false">부서 수정</a> <a
+                        class="flex-fill rounded border-0 nav-link" data-bs-toggle="tab"
+                        href="#chat-contact" role="tab" aria-selected="false">직원 추가</a>
+                </div>
+            </div>
+
+            <div class="tab-content border-top">
+                <div class="tab-pane fade show active" id="chat-recent"
+                     role="tabpanel">
+                    <ul
+                            class="list-unstyled list-group list-group-custom list-group-flush mb-0 orgMemberList">
+                    </ul>
+                </div>
+                <div class="tab-pane fade" id="chat-groups" role="tabpanel">
+                    <ul class="list-unstyled list-group list-group-custom list-group-flush mb-0 gitHub-addr">
+
+                    </ul>
+                </div>
+                <div class="tab-pane fade" id="chat-contact" role="tabpanel">
+                    <ul
+                            class="list-unstyled list-group list-group-custom list-group-flush mb-0">
+                        <li class="list-group-item px-md-4 py-3 py-md-4"><a
+                                href="javascript:void(0);" class="d-flex"> <img
+                                class="avatar rounded-circle" src="assets/images/xs/avatar10.jpg"
+                                alt="">
+                            <div class="flex-fill ms-3 text-truncate">
+                                <div class="d-flex justify-content-between mb-0">
+                                    <h6 class="mb-0">Hannah Gill</h6>
+                                    <div class="text-muted">
+                                        <i class="fa fa-heart-o pl-2 text-danger"></i> <i
+                                            class="fa fa-trash pl-2 text-danger"></i>
+                                    </div>
+                                </div>
+                                <span class="text-muted">hannahgill@my-Task.com</span>
+                            </div>
+                        </a></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--부서추가 -->
+<form class="addInsertForm">
+<div class="modal fade" id="tickadd" tabindex="-1"  aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-md modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title  fw-bold" id="leaveaddLabel"> 부서 추가</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label for="sub" class="form-label">부서이름</label>
+                    <input type="text" class="form-control orgAddInput" id="sub">
+                    <span id="textCheck"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label  class="form-label">상위 부서 선택</label>
+                    <select class="form-select orgInsertSelect">
+
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary addBtnCancel" data-bs-dismiss="modal">취소</button>
+                <button type="submit" class="btn btn-primary">만들기</button>
+            </div>
+        </div>
+    </div>
+    </div>
+</form>
+
+
+
+
+
+
+<script>
+	const companyId = ${companyId};
+	let subBtn = document.querySelector('.sub-btn');
+	let subAdd = document.querySelector('.sub-add');
+	let orgInsertSelect = document.querySelector('.orgInsertSelect'); // 설렉트 옵션
+	let addInsertForm = document.querySelector('.addInsertForm'); // 부서추가버튼
+	let orgAddInput = document.querySelector('.orgAddInput'); // 부서추가버튼
+	let addBtnCancel = document.querySelector('.addBtnCancel'); // 부서추가 취소버튼
+	let orgMemberList = document.querySelector('.orgMemberList'); // 멤버리스트
+
+
+	let modalElement = document.getElementById('tickadd'); // 부서추가 모달
+
+
+	let orgIdMap = {};
+
+	google.charts.load('current', {packages: ['orgchart']});
+	google.charts.setOnLoadCallback(drawChart)
+
+
+	async function drawChart() {
+		let orgData = [];
+		await axios.get(`/ourmine/company/\${companyId}/orgchart/orgchartListJson`, {headers: headers})
+			.then(resp => {
+				org = [...resp.data];
+				console.log("org = ", org);
+				orgData = resp.data;
+			});
+
+		let data = new google.visualization.DataTable();
+		data.addColumn('string', 'Name');
+		data.addColumn('string', 'Manager');
+		data.addColumn('string', 'ToolTip');
+
+		orgData.forEach((item) => {
+			orgIdMap[item.orgchartId.toString()] = item.orgchartId;
+			data.addRow([
+				{'v': item.orgchartId.toString(), 'f': item.departmentName.toString()},
+				item.seniorDepartmentId ? item.seniorDepartmentId.toString() : null,
+				item.departmentCreateDate.toString(),
+			]);
+		});
+
+		let chart = new google.visualization.OrgChart(document.getElementById('chart_div'));
+		chart.draw(data, {
+			allowHtml: true,
+			size: 'large'
+		})
+        await createOrgSelectOptionsAjax(); // 부서추가의 셀렉트 옵션을 만들어줌
+        await addOrg();
+		await addModelClose();
+
+		google.visualization.events.addListener(chart, 'select',async () => {
+			let selectedItem = chart.getSelection()[0];
+			if (selectedItem) {
+				let orgId = data.getValue(selectedItem.row, 0);
+				let dataOrgId = orgIdMap[orgId];// UI 상에서 누른 부서의 ID 값을 가져옴
+                const memberListOrg = {orgchartId :'', companyId : ''}
+                memberListOrg.orgchartId = dataOrgId;
+				memberListOrg.companyId = companyId;
+              await axios.post(`/ourmine/company/\${companyId}/orgchart/orgchartMemberListJson`,memberListOrg,{headers:headers})
+                    .then(resp => {
+						let data = resp.data;
+	                    console.log(data);
+	                    orgMemberList.innerHTML = createListMember(data);
+                    })
+			}
+		});
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+   async function addOrg(){
+	    addInsertForm.addEventListener('submit', async (e) => {
+			e.preventDefault();
+			if(orgAddInput.value.trim() === ''){
+				document.getElementById('textCheck').innerHTML = '부서 이름을 입력해주세요';
+				document.getElementById('textCheck').style.color = 'red';
+				return false;
+            }
+			let orgAddInputValue = orgAddInput.value;
+			const org = {
+                companyId : '',
+				departmentName : '',
+				seniorDepartmentId : '',
+            }
+		    let option = orgInsertSelect.options[orgInsertSelect.selectedIndex];
+		    org.companyId = companyId;
+		    org.departmentName =  orgAddInputValue;
+		    org.seniorDepartmentId = option.getAttribute('data-orgid');
+		    console.log("추가 org =",org);
+		await axios.post(`/ourmine/company/\${companyId}/orgchart/orgchartInsert`,org,{headers:headers})
+                .then(resp => {
+					let data = resp.data;
+					if(data > 0){
+						addBtnCancel.click();
+						orgAddInput.value = '';
+						drawChart();
+                    }
+                })
+        })
+    }
+
+
+
+	// 추가 모달 닫기 누르면 부서 이름을 입력해주세요 이거 초기화 시켜주기
+	function addModelClose(){
+		modalElement.addEventListener('hidden.bs.modal', () => {
+			orgAddInput.value = '';
+			document.getElementById('textCheck').innerHTML = '';
+		});
+	}
+
+	function createOrgSelectOptionsAjax(){
+		axios.get(`/ourmine/company/\${companyId}/orgchart/orgchartListJson`,{headers: headers})
+			.then(resp => {
+				let data = resp.data;
+				orgInsertSelect.innerHTML = createOrgSelectOptions(data)
+			})
+	}
+
+	// 부서 생성모달 select 옵션 html 만들어 주는 함수
+	function createOrgSelectOptions(data){
+        let content = '';
+		data.map(item => {
+			if(item.seniorDepartmentId === null){
+				console.log('최상위 부서 = ',item)
+				content += `<option selected data-orgid=\${item.orgchartId}>\${item.departmentName}</option>`
+			}else{
+				content += `<option data-orgid=\${item.orgchartId}>\${item.departmentName}</option>`
+            }
+        })
+        return content;
+	}
+
+
+	function createListMember(item) {
+		let content = '';
+		if(item.length ===0){
+			return ;
+        }
+		item.map(user => {
+			content +=   `<li class="list-group-item px-md-4 py-3 py-md-4">
+				<a href="javascript:void(0);" class="d-flex">
+					<img class="avatar rounded-circle" src="\${user.imageContents}" alt="">
+					<div class="flex-fill ms-3 text-truncate">
+						<h6 class="d-flex justify-content-between mb-0"><span>\${user.memberName}</span> <small class="msg-time">\${user.commitDate}</small></h6>
+						<span class="text-muted">\${user.commitMessage}</span>
+					</div>
+				</a>
+			</li>`;
+		})
+		return content;
+	}
+
+</script>

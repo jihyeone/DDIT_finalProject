@@ -1,0 +1,92 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+
+<script type="text/javascript" src="${cPath}/resources/js/jquery-3.6.3.min.js"></script>
+
+<style>
+	.slidebanner {
+		position: relative;
+		height: 80px;
+		width: 100%;
+		overflow: hidden;
+	}
+	
+	.slidebanner, .bannerbox {
+		position: absolute;
+		margin: 0;
+		padding: 0;
+	}
+	
+	.slidebanner, li {
+		float: center;
+		list-style-type: none;
+		margin-left: 30px;
+		margin-right: 30px;
+	}
+	
+	.slidebanner li:first-child {
+		margin: 0
+	}
+</style>
+
+<div id="mytask-layout" class="theme-indigo">
+
+    <!-- main body area -->
+    <div class="main p-2 py-3 p-xl-2">
+        <!-- Body: Body -->
+        <div class="body d-flex p-0 p-xl-2">
+            <div class="container-xl">
+            	<br>
+	            <div style="max-width: 1000px; margin: auto;">
+	            	<img src="${cPath }/resources/images/no-data.svg" alt="interview-img">
+	            </div>
+			</div>
+		</div>
+		<br>
+		<br>
+		<br>
+		<div class="slidebanner">
+			<ul class="bannerbox">    
+				<li>
+					<img src="${cPath}/resources/images/index/fullcalendar.png" alt="Fullcalendar" />
+					<img src="${cPath}/resources/images/index/로고_투명.png" alt="OURmine" />
+					<img src="${cPath}/resources/images/index/Spring_Framework.png" alt="Spring" />
+					<img src="${cPath}/resources/images/index/java.png" alt="Java" />
+					<img src="${cPath}/resources/images/index/오라클.png" alt="Oracle" />
+					<img src="${cPath}/resources/images/index/톰캣.png" alt="Tomcat" />
+					<img src="${cPath}/resources/images/index/fullcalendar.png" alt="Fullcalendar" />
+					<img src="${cPath}/resources/images/index/로고_투명.png" alt="OURmine" />
+					<img src="${cPath}/resources/images/index/Spring_Framework.png" alt="Spring" />
+					<img src="${cPath}/resources/images/index/java.png" alt="Java" />
+					<img src="${cPath}/resources/images/index/오라클.png" alt="Oracle" />
+					<img src="${cPath}/resources/images/index/톰캣.png" alt="Tomcat" />
+					<img src="${cPath}/resources/images/index/fullcalendar.png" alt="Fullcalendar" />
+					<img src="${cPath}/resources/images/index/로고_투명.png" alt="OURmine" />
+					<img src="${cPath}/resources/images/index/Spring_Framework.png" alt="Spring" />
+				</li>
+			</ul>                
+		</div>
+    </div>
+    
+</div>
+
+<script>
+	timer();
+	var current=0;
+	var $interval;
+	
+	function timer(){
+	  var $interval=setInterval(function(){slide()},2000);                        
+	}
+	
+	function slide(){
+	  $(".bannerbox").animate({left:"-=200px"},3000,function(){
+	    $(this).css({"left":0});
+	    $(".bannerbox").append( $("ul").children("li").eq(0) );
+	  });    
+	  current++;
+	  if(current==15)current=0;
+	}    
+</script>

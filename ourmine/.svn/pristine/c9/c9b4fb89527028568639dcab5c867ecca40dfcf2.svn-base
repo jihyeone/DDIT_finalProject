@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.ddit.commons.dao.AdminIndexDAO">
+	<select id="selectMemberCNT" resultType="int">
+		SELECT 
+			COUNT(MEMBER_ID) AS MEMBER_COUNT
+		FROM MEMBER
+	</select>
+	<select id="selectSubscribeCNT" resultType="int">
+		SELECT 
+			COUNT(SUBSCRIBE_ID) AS SUBSCRIBE_COUNT
+		FROM 
+			SUBSCRIBE
+		WHERE SUBSCRIBE_USE = 'Y'
+	</select>
+	<select id="selectSubEndCloseComList" resultType="kr.or.ddit.commons.AdminIndexVO">
+		<![CDATA[
+		SELECT
+		    SB.SUBSCRIBE_ID,
+		    SB.SUBSCRIBE_END_DATE,
+		    SB.MEMBER_ID,
+		    M.MEMBER_NAME,
+		    A.COMPANY_ID,
+		    C.COMPANY_NAME
+		FROM
+		    SUBSCRIBE SB
+		    JOIN MEMBER M ON SB.MEMBER_ID = M.MEMBER_ID
+		    JOIN ASSOCIATION A ON SB.MEMBER_ID = A.MEMBER_ID
+		    JOIN COMPANY C ON A.COMPANY_ID = C.COMPANY_ID
+		WHERE
+		    SUBSCRIBE_USE = 'Y'
+		    AND SB.SUBSCRIBE_END_DATE <= SYSDATE + 30
+		ORDER BY
+		    SB.SUBSCRIBE_END_DATE
+		]]>
+	</select>
+</mapper>

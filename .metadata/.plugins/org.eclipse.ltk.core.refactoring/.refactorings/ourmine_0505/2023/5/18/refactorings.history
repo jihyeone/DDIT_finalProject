@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;leftMenuAdmin.jsp&apos; to &apos;includee&apos;&#x0D;&#x0A;- Original project: &apos;ourmine_0505&apos;&#x0D;&#x0A;- Destination element: &apos;includee&apos;&#x0D;&#x0A;- Original element: &apos;leftMenuAdmin.jsp&apos;" description="Copy file" element1="src/main/webapp/includee/leftMenuAdmin.jsp" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1683272921586" target="/ourmine/src/main/webapp/includee" units="0" version="1.0"/>
+</session>

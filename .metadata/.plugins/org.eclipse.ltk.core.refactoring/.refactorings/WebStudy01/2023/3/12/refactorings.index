@@ -1,0 +1,24 @@
+1679280379141	Extract interface 'PropertyDAO'
+1679280442537	Rename type 'PropertyDAOImpl'
+1679280445314	Rename type 'PropertyDAOImplTest'
+1679281947107	Rename resource 'jdbcDesc.jsp'
+1679282669608	Copy file
+1679292198528	Change method 'retrieveProperties'
+1679292295085	Change method 'selectProperties'
+1679297560625	Rename type 'MemberDAOImpl2'
+1679299066172	Rename type 'PropertyServiceImple2'
+1679300369633	Rename type 'MemberDAOImpl_DB'
+1679369733842	Copy compilation unit
+1679379967443	Copy file
+1679380754512	Copy file
+1679455416897	Copy file
+1679455450659	Delete element
+1679455461552	Copy file
+1679455506369	Delete element
+1679455514784	Copy file
+1679461690353	Delete element
+1679548175177	Copy compilation unit
+1679554324664	Copy file
+1679619095715	Copy folders
+1679653871459	Copy compilation unit
+1679653882898	Copy compilation unit

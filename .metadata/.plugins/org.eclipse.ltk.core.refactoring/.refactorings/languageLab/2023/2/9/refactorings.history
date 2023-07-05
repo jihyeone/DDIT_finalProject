@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;kr.or.ddit.io.streamDesc&apos; to &apos;StreamDesc&apos;&#x0D;&#x0A;- Original project: &apos;languageLab&apos;&#x0D;&#x0A;- Original element: &apos;kr.or.ddit.io.streamDesc&apos;&#x0D;&#x0A;- Renamed element: &apos;kr.or.ddit.io.StreamDesc&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;streamDesc&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;kr.or.ddit.io{streamDesc.java[streamDesc" matchStrategy="1" name="StreamDesc" qualified="false" references="true" similarDeclarations="false" stamp="1677580748069" textual="false" version="1.0"/>
+</session>

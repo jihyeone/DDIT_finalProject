@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 2 packages to &apos;springlocLab/src/main/java/kr.or.ddit.sample&apos;&#x0D;&#x0A;- Original project: &apos;dummySpring&apos;&#x0D;&#x0A;- Destination element: &apos;springlocLab/src/main/java/kr.or.ddit.sample&apos;&#x0D;&#x0A;- Original elements:&#x0D;&#x0A;     dummySpring/src/main/java/kr.or.ddit.dao&#x0D;&#x0A;     dummySpring/src/main/java/kr.or.ddit.service" description="Copy packages" destination="=springlocLab/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;kr.or.ddit.sample" element1="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;kr.or.ddit.dao" element2="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;kr.or.ddit.service" flags="589830" fragments="2" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyPackages" stamp="1680665040603" version="1.0"/>
+</session>
